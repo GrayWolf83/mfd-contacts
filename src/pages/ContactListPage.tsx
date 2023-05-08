@@ -5,10 +5,19 @@ import { ContactDto } from 'src/types/dto/ContactDto'
 import { useAppSelector } from 'src/store'
 import { getContactsList } from 'src/store/contacts'
 import { getGroupsList } from 'src/store/groups'
+import { useEffect, useState } from 'react'
 
 export const ContactListPage = () => {
 	const contacts = useAppSelector(getContactsList())
 	const groups = useAppSelector(getGroupsList())
+	const [filteredContacts, setFilteredContacts] = useState<ContactDto[]>([])
+
+	useEffect(() => {
+		if (contacts) {
+			setFilteredContacts(contacts)
+		}
+	}, [contacts])
+
 	const onSubmit = (fv: Partial<FilterFormValues>) => {
 		let findContacts: ContactDto[] = contacts
 
@@ -29,7 +38,7 @@ export const ContactListPage = () => {
 			}
 		}
 
-		// setContacts(findContacts)
+		setFilteredContacts(findContacts)
 	}
 
 	return (
@@ -43,7 +52,7 @@ export const ContactListPage = () => {
 			</Col>
 			<Col>
 				<Row xxl={4} className='g-4'>
-					{contacts.map((contact) => (
+					{filteredContacts.map((contact) => (
 						<Col key={contact.id}>
 							<ContactCard contact={contact} withLink />
 						</Col>
