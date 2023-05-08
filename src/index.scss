@@ -13,3 +13,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+li a {
+  text-decoration: none;
+  color: #6c757d;
+}
+
+li a.active {
+  color: #0d6efd;
+}
+
+img.favorite-icon {
+  width: 24px;
+  cursor: pointer;
+}
