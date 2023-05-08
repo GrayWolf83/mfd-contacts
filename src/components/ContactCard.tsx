@@ -39,9 +39,7 @@ export const ContactCard = memo<ContactCardProps>(
 					<Card.Body>
 						<ListGroup>
 							<ListGroup.Item>
-								<Link to={`tel:${phone}`} target='_blank'>
-									{phone}
-								</Link>
+								<Link to={`tel:${phone}`}>{phone}</Link>
 							</ListGroup.Item>
 							<ListGroup.Item>{birthday}</ListGroup.Item>
 							<ListGroup.Item>{address}</ListGroup.Item>
