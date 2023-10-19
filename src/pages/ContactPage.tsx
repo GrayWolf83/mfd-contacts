@@ -1,13 +1,13 @@
+import { observer } from 'mobx-react-lite'
 import { Col, Row } from 'react-bootstrap'
 import { Navigate, useParams } from 'react-router-dom'
 import { ContactCard } from 'src/components/ContactCard'
 import { Empty } from 'src/components/Empty'
-import { useAppSelector } from 'src/store'
-import { getContactById } from 'src/store/contacts'
+import { contactsStore } from 'src/mobx/contactsStore'
 
-export const ContactPage = () => {
+export const ContactPage = observer(() => {
 	const { contactId } = useParams<{ contactId: string }>()
-	const contact = useAppSelector(getContactById(contactId || ''))
+	const contact = contactsStore.getContactById(contactId || "")
 
 	if (!contact) {
 		return <Navigate to='/contact' />
@@ -20,4 +20,4 @@ export const ContactPage = () => {
 			</Col>
 		</Row>
 	)
-}
+})

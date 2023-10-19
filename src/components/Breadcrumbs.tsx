@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import {memo} from 'react';
 import {Col, ListGroup, Row} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 

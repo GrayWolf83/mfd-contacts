@@ -9,15 +9,12 @@ import {
 	FavoritListPage,
 	GroupListPage,
 } from 'src/pages'
-import { Provider } from 'react-redux'
-import { store } from '../../store'
 
 export const MainApp = () => {
 	return (
 		<ThemeProvider
 			breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
 			minBreakpoint='xxs'>
-			<Provider store={store}>
 				<BrowserRouter>
 					<Routes>
 						<Route path='/' element={<Layout />}>
@@ -43,7 +40,6 @@ export const MainApp = () => {
 						</Route>
 					</Routes>
 				</BrowserRouter>
-			</Provider>
 		</ThemeProvider>
 	)
 }
