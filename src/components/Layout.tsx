@@ -1,21 +1,22 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { Col, Container, Row } from 'react-bootstrap'
-import React, { useEffect } from 'react'
 import { MainMenu } from './MainMenu'
 import { Breadcrumbs } from 'src/components/Breadcrumbs'
-import { useAppDispatch } from 'src/store'
-import { loadContactsList } from 'src/store/contacts'
-import { loadGroupsList } from 'src/store/groups'
-import { DATA_CONTACT, DATA_GROUP_CONTACT } from 'src/__data__'
+import { autorun } from 'mobx'
+import { contactsStore } from 'src/mobx/contactsStore'
+import { groupsStore } from 'src/mobx/groupsStore'
+import {useEffect} from 'react';
+
 
 export const Layout = () => {
 	const location = useLocation()
 	const pathNames = location.pathname.split('/').filter((x) => x)
-	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		dispatch(loadContactsList(DATA_CONTACT || []))
-		dispatch(loadGroupsList(DATA_GROUP_CONTACT || []))
+		autorun(()=> {
+			contactsStore.loadList()
+			groupsStore.loadList()
+		})
 	}, [])
 
 	return (

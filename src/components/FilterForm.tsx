@@ -1,8 +1,8 @@
 import { Formik } from 'formik'
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap'
-import React, { memo } from 'react'
 import { FormikConfig } from 'formik/dist/types'
 import { GroupContactsDto } from 'src/types/dto/GroupContactsDto'
+import { observer } from 'mobx-react-lite'
 
 export interface FilterFormValues {
 	name: string
@@ -13,7 +13,7 @@ interface FilterFormProps extends FormikConfig<Partial<FilterFormValues>> {
 	groupContactsList: GroupContactsDto[]
 }
 
-export const FilterForm = memo<FilterFormProps>(
+export const FilterForm = observer<FilterFormProps>(
 	({ onSubmit, initialValues = {}, groupContactsList }) => {
 		return (
 			<Formik initialValues={initialValues} onSubmit={onSubmit}>

@@ -1,22 +1,20 @@
-import React, { memo } from 'react'
 import { ContactDto } from 'src/types/dto/ContactDto'
 import { Card, ListGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'src/store'
-import { hasFavoriteById, toggleFavoriteById } from 'src/store/favorites'
+import { observer } from 'mobx-react-lite'
+import { favoritesStore } from 'src/mobx/favoriteStore'
 
 interface ContactCardProps {
 	contact: ContactDto
 	withLink?: boolean
 }
 
-export const ContactCard = memo<ContactCardProps>(
+export const ContactCard = observer<ContactCardProps>(
 	({ contact: { photo, id, name, phone, birthday, address }, withLink }) => {
-		const hasFavorite = useAppSelector(hasFavoriteById(id))
-		const dispatch = useAppDispatch()
+		const hasFavorite = favoritesStore.hasFavorite(id)
 
 		const handleToggleFavorite = () => {
-			dispatch(toggleFavoriteById(id))
+			favoritesStore.toggleFavorite(id)
 		}
 
 		return (
@@ -30,7 +28,7 @@ export const ContactCard = memo<ContactCardProps>(
 							name
 						)}
 						<img
-							src={hasFavorite ? '/star-fill.svg' : 'star.svg'}
+							src={hasFavorite ? '/star-fill.svg' : '/star.svg'}
 							className='favorite-icon'
 							onClick={handleToggleFavorite}
 							alt='favorite icon'

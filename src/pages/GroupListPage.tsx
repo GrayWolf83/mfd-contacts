@@ -1,10 +1,10 @@
+import { observer } from 'mobx-react-lite'
 import { Col, Row } from 'react-bootstrap'
 import { GroupContactsCard } from 'src/components/GroupContactsCard'
-import { useAppSelector } from 'src/store'
-import { getGroupsList } from 'src/store/groups'
+import { groupsStore } from 'src/mobx/groupsStore'
 
-export const GroupListPage = () => {
-	const groups = useAppSelector(getGroupsList())
+export const GroupListPage = observer(() => {
+	const groups = groupsStore.groups
 
 	return (
 		<Row xs={1} md={2} lg={4} className='g-3'>
@@ -15,4 +15,4 @@ export const GroupListPage = () => {
 			))}
 		</Row>
 	)
-}
+})

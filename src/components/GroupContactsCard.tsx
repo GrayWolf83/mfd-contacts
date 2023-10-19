@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { observer } from 'mobx-react-lite'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { GroupContactsDto } from 'src/types/dto/GroupContactsDto'
@@ -8,7 +8,7 @@ interface GroupContactsCardProps {
 	withLink?: boolean
 }
 
-export const GroupContactsCard = memo<GroupContactsCardProps>(
+export const GroupContactsCard = observer<GroupContactsCardProps>(
 	({
 		groupContacts: { id, name, description, photo, contactIds },
 		withLink,
